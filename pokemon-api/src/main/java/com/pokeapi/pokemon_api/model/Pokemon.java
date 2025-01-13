@@ -1,9 +1,6 @@
 package com.pokeapi.pokemon_api.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -21,13 +18,18 @@ public class Pokemon {
 
     private Integer weight;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;
+
     protected Pokemon() {}
 
-    public Pokemon(String name, Integer base_experience, Integer height, Integer weight) {
+    public Pokemon(String name, Integer base_experience, Integer height, Integer weight, Type type) {
         this.name = name;
         this.base_experience = base_experience;
         this.height = height;
         this.weight = weight;
+        this.type = type;
     }
 
     public UUID getId() {
@@ -52,5 +54,13 @@ public class Pokemon {
 
     public String getName() {
         return name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 }
