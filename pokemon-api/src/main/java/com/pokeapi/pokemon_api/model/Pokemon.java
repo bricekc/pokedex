@@ -1,15 +1,17 @@
-package model;
+package com.pokeapi.pokemon_api.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.util.UUID;
+
 @Entity
 public class Pokemon {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy= GenerationType.UUID)
+    private UUID id;
 
     private String name;
 
@@ -28,7 +30,7 @@ public class Pokemon {
         this.weight = weight;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
