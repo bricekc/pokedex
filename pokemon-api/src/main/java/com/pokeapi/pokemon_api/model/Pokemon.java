@@ -12,11 +12,11 @@ public class Pokemon {
 
     private String name;
 
-    private Integer base_experience;
+    private int base_experience;
 
-    private Integer height;
+    private int height;
 
-    private Integer weight;
+    private int weight;
 
     @ManyToOne
     @JoinColumn(name = "type_id")
@@ -24,7 +24,7 @@ public class Pokemon {
 
     protected Pokemon() {}
 
-    public Pokemon(String name, Integer base_experience, Integer height, Integer weight, Type type) {
+    public Pokemon(String name, int base_experience, int height, int weight, Type type) {
         this.name = name;
         this.base_experience = base_experience;
         this.height = height;
@@ -40,7 +40,7 @@ public class Pokemon {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
@@ -48,7 +48,7 @@ public class Pokemon {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
