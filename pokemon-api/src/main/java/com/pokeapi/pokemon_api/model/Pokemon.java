@@ -52,8 +52,20 @@ public class Pokemon {
         this.weight = weight;
     }
 
+    public int getBase_experience() {
+        return base_experience;
+    }
+
+    public void setBase_experience(int base_experience) {
+        this.base_experience = base_experience;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Type getType() {
