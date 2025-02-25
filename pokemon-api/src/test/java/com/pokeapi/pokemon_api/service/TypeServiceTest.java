@@ -1,40 +1,50 @@
 package com.pokeapi.pokemon_api.service;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
 import com.pokeapi.pokemon_api.dto.TypeDTO;
 import com.pokeapi.pokemon_api.model.Type;
 import com.pokeapi.pokemon_api.repository.TypeRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
-public class TypeServiceTest {
+import java.util.List;
 
-    @MockBean
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+class TypeServiceTest {
+    @Mock
     private TypeRepository typeRepository;
 
-    @Autowired
+    @InjectMocks
     private TypeService typeService;
 
-    @BeforeEach
-    public void setUp() {
+    @Test
+    void testGetAllType() {
+        Type type1 = new Type("Electrique");
+        Type type2 = new Type("Feu");
+        when(typeRepository.findAll()).thenReturn(List.of(type1, type2));
+
+        List<Type> result = typeService.getAllType();
+
+        assertNotNull(result);
+        assertEquals(List.of(type1, type2), result);
     }
 
     @Test
-    public void testCreateType() {
-        Type type = new Type("Fire");
+    void testSaveType() {
+        TypeDTO typeDTO = new TypeDTO("Eau");
+        Type type = new Type(typeDTO.getName());
+
         when(typeRepository.save(any(Type.class))).thenReturn(type);
 
-        TypeDTO typeDTO = new TypeDTO("Fire");
         Type result = typeService.save(typeDTO);
 
-        assertNotNull(result);
-        assertEquals("Fire", result.getName());
-        verify(typeRepository, times(1)).save(any(Type.class));
+        assertEquals(type, result);
     }
 }
